@@ -1,5 +1,6 @@
 const {Command} = require('discord.js-commando');
 
+
 class LeaveChannelCommand extends Command
 {
     constructor(client) 

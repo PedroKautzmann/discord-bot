@@ -1,13 +1,15 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { CommandoClient } = require('discord.js-commando');
-const { token } = require('./config.json');
+const Youtube = require('simple-youtube-api');
+const { token, youtubeApiKey } = require('./config.json');
 const path = require('path');
 const ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
+const youtube = new Youtube(youtubeApiKey);
+
 
 const client = new CommandoClient({
-    commandPrefix: '!',
-    
+    commandPrefix: '!',   
     disableEveryone: true
 });
 
@@ -32,7 +34,7 @@ client.on('ready', () => {
   console.log('This bot is online!');
 
 
-    
+    //token conta prefeitura "token": "NjEwNDkyNzYyMzgyNTMyODIy.XVaPZw.VumVccMHIOFUoBmIT7Df0CP1L_c",
   
     
   });
