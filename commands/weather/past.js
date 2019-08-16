@@ -3,19 +3,18 @@ const {Command} = require('discord.js-commando');
 const weather = require('weather-js');
 
 
-class WeatherCommand extends Command {
+class PrevisaoCommand extends Command {
     constructor(client) 
     {
         super(client,{
-            name: 'weather',
+            name: 'past',
             group: 'weather',
-            memberName: 'leave',
-            description: 'Shows the current weather'
+            memberName: 'past',
+            description: 'Shows the past weather'
         });
     }
-
-    async run (message, args) {
-		weather.find({search: args, degreeType: 'C'}, function(err, result) {
+	async run (message, args) {
+        weather.find({search: args, degreeType: 'C'}, function(err, result) {
             if (err) message.channel.send(err);
 
             if (result === undefined || result.length === 0) {
@@ -25,25 +24,20 @@ class WeatherCommand extends Command {
 
             var current = result[0].current;
             var location = result[0].location;
-            var forecast = result[0].forecast[1];
+            var forecast = result[0].forecast[0];
 
             const embed = new Discord.RichEmbed()
-                .setDescription(`**${current.skytext}**`)
-                .setAuthor(`Weather today for ${current.observationpoint}`)
+                .setDescription(`**${forecast.skytextday}**`)
+                .setAuthor(`Weather yesterday for ${current.observationpoint}`)
                 .setThumbnail(current.imageUrl)
                 .setColor(0x00AE86)
-                .addField('Day', current.day, true)
-                .addField('Date', current.date, true)
+                .addField('Day', forecast.day, true)
+                .addField('Date', forecast.date, true)
                 .addField('Timezone',`UTC ${location.timezone}`, true)
                 .addField('Degree Type', location.degreetype, true)
-                .addField('Temperature', `${current.temperature} Degrees`, true)
-                .addField('Feels like', `${current.feelslike} Degrees`, true)
                 .addField('Low', forecast.low, true)
                 .addField('High', forecast.high, true)
-                .addField('Winds', current.winddisplay, true)
-                .addField('Humidity', `${current.humidity}%`, true)
-                
-                //.addField('Previsão', forecast.day, true)
+                if (forecast.precip) {{embed.addField('Precipitation', forecast.precip, true)}}
                 // if (current.temperature > 20){{embed.addField('Sugestão', 'Regata, bermudinha e a CHINELA estralando')}}
                 // if (current.temperature < 15){{embed.addField('Sugestão', 'Já dá pra pegar um casaco')}}
                 
@@ -51,10 +45,9 @@ class WeatherCommand extends Command {
 
                 message.channel.send({embed});
         })
-	}
+    }
+		
+};
 
 
-}
-	
-
-module.exports = WeatherCommand;
+module.exports = PrevisaoCommand;

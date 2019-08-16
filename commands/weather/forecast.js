@@ -7,10 +7,10 @@ class PrevisaoCommand extends Command {
     constructor(client) 
     {
         super(client,{
-            name: 'previsao',
+            name: 'forecast',
             group: 'weather',
-            memberName: 'previsao',
-            description: 'Shows the forecast weather!'
+            memberName: 'forecast',
+            description: 'Shows the weather forecast'
         });
     }
 	async run (message, args) {
@@ -32,12 +32,14 @@ class PrevisaoCommand extends Command {
                 .setThumbnail(current.imageUrl)
                 .setColor(0x00AE86)
                 .addField('Day', forecast.day, true)
-                .addField('Timezone',`UTC${location.timezone}`, true)
+                .addField('Date', forecast.date, true)
+                .addField('Timezone',`UTC ${location.timezone}`, true)
+                .addField('Degree Type', location.degreetype, true)
                 .addField('Low', forecast.low, true)
                 .addField('High', forecast.high, true)
-                .addField('Degree Type', location.degreetype, true)
-                if (current.temperature > 20){{embed.addField('Sugestão', 'Regata, bermudinha e a CHINELA estralando', true)}}
-                if (current.temperature < 15){{embed.addField('Sugestão', 'Já dá pra pegar um casaco', true)}}
+                if (forecast.precip) {{embed.addField('Precipitation', forecast.precip, true)}}
+                // if (current.temperature > 20){{embed.addField('Sugestão', 'Regata, bermudinha e a CHINELA estralando')}}
+                // if (current.temperature < 15){{embed.addField('Sugestão', 'Já dá pra pegar um casaco')}}
                 
 
 
