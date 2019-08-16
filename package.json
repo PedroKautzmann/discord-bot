@@ -1,0 +1,21 @@
+{
+  "name": "malicbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Kautzmann",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "discord.js-commando": "^0.10.0",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^4.0.0",
+    "nba.js": "^0.6.1",
+    "opusscript": "0.0.7",
+    "weather-js": "^2.0.0",
+    "ytdl-core": "^0.29.5"
+  }
+}
