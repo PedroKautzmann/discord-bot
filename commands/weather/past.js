@@ -37,10 +37,7 @@ class PrevisaoCommand extends Command {
                 .addField('Degree Type', location.degreetype, true)
                 .addField('Low', forecast.low, true)
                 .addField('High', forecast.high, true)
-                if (forecast.precip) {{embed.addField('Precipitation', forecast.precip, true)}}
-                // if (current.temperature > 20){{embed.addField('Sugestão', 'Regata, bermudinha e a CHINELA estralando')}}
-                // if (current.temperature < 15){{embed.addField('Sugestão', 'Já dá pra pegar um casaco')}}
-                
+                if (forecast.precip) {{embed.addField('Precipitation', forecast.precip, true)}}               
 
 
                 message.channel.send({embed});
