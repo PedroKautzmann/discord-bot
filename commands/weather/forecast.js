@@ -3,7 +3,7 @@ const {Command} = require('discord.js-commando');
 const weather = require('weather-js');
 
 
-class PrevisaoCommand extends Command {
+class ForecastCommand extends Command {
     constructor(client) 
     {
         super(client,{
@@ -24,30 +24,62 @@ class PrevisaoCommand extends Command {
 
             var current = result[0].current;
             var location = result[0].location;
-            var forecast = result[0].forecast[2];
+            var forecast1 = result[0].forecast[2];
+            var forecast2 = result[0].forecast[3];
+            var forecast3 = result[0].forecast[4];
 
             const embed = new Discord.RichEmbed()
-                .setDescription(`**${forecast.skytextday}**`)
+                .setDescription(`**${forecast1.skytextday}**`)
                 .setAuthor(`Weather tomorrow for ${current.observationpoint}`)
-                .setThumbnail(current.imageUrl)
                 .setColor(0x00AE86)
-                .addField('Day', forecast.day, true)
-                .addField('Date', forecast.date, true)
+                .addField('Day', forecast1.day, true)
+                .addField('Date', forecast1.date, true)
                 .addField('Timezone',`UTC ${location.timezone}`, true)
                 .addField('Degree Type', location.degreetype, true)
-                .addField('Low', forecast.low, true)
-                .addField('High', forecast.high, true)
-                if (forecast.precip) {{embed.addField('Precipitation', forecast.precip, true)}}
-                // if (current.temperature > 20){{embed.addField('Sugestão', 'Regata, bermudinha e a CHINELA estralando')}}
-                // if (current.temperature < 15){{embed.addField('Sugestão', 'Já dá pra pegar um casaco')}}
+                .addField('Low', forecast1.low, true)
+                .addField('High', forecast1.high, true)
+                if (forecast1.precip) {{embed.addField('Precipitation', forecast1.precip, true)}}
+
+
+            const embed2 = new Discord.RichEmbed()
+                .setDescription(`**${forecast2.skytextday}**`)
+                .setAuthor(`Weather ${forecast2.day} for ${current.observationpoint}`)
+                .setColor(0x00AE86)
+                .addField('Day', forecast2.day, true)
+                .addField('Date', forecast2.date, true)
+                .addField('Timezone',`UTC ${location.timezone}`, true)
+                .addField('Degree Type', location.degreetype, true)
+                .addField('Low', forecast2.low, true)
+                .addField('High', forecast2.high, true)
+                if (forecast2.precip) {{embed2.addField('Precipitation', forecast2.precip, true)}}
+
+
+            const embed3 = new Discord.RichEmbed()
+                .setDescription(`**${forecast3.skytextday}**`)
+                .setAuthor(`Weather ${forecast3.day} for ${current.observationpoint}`)
+                .setColor(0x00AE86)
+                .addField('Day', forecast3.day, true)
+                .addField('Date', forecast3.date, true)
+                .addField('Timezone',`UTC ${location.timezone}`, true)
+                .addField('Degree Type', location.degreetype, true)
+                .addField('Low', forecast3.low, true)
+                .addField('High', forecast3.high, true)
+                if (forecast3.precip) {{embed3.addField('Precipitation', forecast3.precip, true)}}
+                
                 
 
 
-                message.channel.send({embed});
+                message.channel.send({embed})
+                .then(
+                    message.channel.send(embed2)
+                ).then(
+                    message.channel.send(embed3)
+                )
+                
         })
     }
 		
 };
 
 
-module.exports = PrevisaoCommand;
+module.exports = ForecastCommand;
